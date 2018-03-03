@@ -170,7 +170,7 @@ sed -i -r 's/timeout\s+[0-9]+/timeout 1/g' $tmp/iso_new/isolinux/isolinux.cfg
 # set late command
 
 if [[ $ub1604 == "yes" ]]; then
-   late_command="apt-install wget; in-target wget --no-check-certificate -O /home/$username/start.sh https://raw.githubusercontent.com/PASPX/ubuntu16/master/start.sh ;\
+   late_command="apt-install wget; in-target wget --no-check-certificate -O /home/$username/start.sh https://raw.githubusercontent.com/vcas/ubntunattended/master/start.sh ;\
      in-target chmod +x /home/$username/start.sh ;"
 else 
    late_command="chroot /target wget -O /home/$username/start.sh https://raw.githubusercontent.com/PASPX/ubuntu16/master/start.sh ;\
@@ -206,7 +206,7 @@ seed_checksum=$(md5sum $tmp/iso_new/preseed/$seed_file)
 sed -i "/label install/ilabel autoinstall\n\
   menu label ^Autoinstall PASPX Ubuntu Server\n\
   kernel /install/vmlinuz\n\
-  append file=/cdrom/preseed/ubuntu-server.seed initrd=/install/initrd.gz auto=true priority=high preseed/file=/cdrom/preseed/kureq.seed preseed/file/checksum=$seed_checksum --" $tmp/iso_new/isolinux/txt.cfg
+  append file=/cdrom/preseed/ubuntu-server.seed initrd=/install/initrd.gz auto=true priority=high preseed/file=/cdrom/preseed/ubnt.seed preseed/file/checksum=$seed_checksum --" $tmp/iso_new/isolinux/txt.cfg
 
 echo " creating the remastered iso"
 cd $tmp/iso_new
